@@ -482,6 +482,12 @@ export default async function StaticFeedsPage() {
     .map(({ field }) => field)
     .filter((field) => field !== "_sources")
     .slice(0, 8);
+  const lodgingListings = staticContentFeed.listings.filter((listing) => getRecordText(listing, "listing_type") === "Lodging");
+  const listingCertificationFields = staticContentFeed.listings.flatMap((listing) =>
+    asJsonObjectArray(listing.fields)
+      .filter((field) => getRecordText(field, "detail_type_id") === "23")
+      .map((field) => ({ listing, field })),
+  );
 
   return (
     <main className="min-h-screen bg-[#eef3ef] px-5 py-8 text-[#18211c] sm:px-8 lg:px-12">
@@ -619,6 +625,9 @@ export default async function StaticFeedsPage() {
 
               <section className="mt-5 border border-[#cdd9cf] bg-[#f7faf7] p-4">
                 <h3 className="text-lg font-semibold">Listings</h3>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-[#59665d]">
+                  categories[] is shown as a flat source array. The listing payload does not include parent category data, so parent/child hierarchy must come from the separate category endpoint once confirmed.
+                </p>
                 <div className="mt-3 overflow-auto">
                   <table className="w-full min-w-[980px] border-collapse text-left text-sm">
                     <thead className="text-[#59665d]">
@@ -652,6 +661,7 @@ export default async function StaticFeedsPage() {
                                   {getRecordText(category, "category_name") ?? ""}
                                   <span className="block font-mono text-xs text-[#59665d]">
                                     categories[{categoryIndex}].category_id {getRecordText(category, "category_id") ?? ""}
+                                    {getRecordText(category, "is_primary_category") ? `, is_primary_category ${getRecordText(category, "is_primary_category")}` : ""}
                                     {getRecordText(category, "sort_order") ? `, sort_order ${getRecordText(category, "sort_order")}` : ""}
                                   </span>
                                 </span>
@@ -677,6 +687,132 @@ export default async function StaticFeedsPage() {
                       })}
                     </tbody>
                   </table>
+                </div>
+              </section>
+
+              <section className="mt-5 border border-[#cdd9cf] bg-[#f7faf7] p-4">
+                <h3 className="text-lg font-semibold">Listing-Level Certification Fields</h3>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-[#59665d]">
+                  These are embedded directly in listing.fields with detail_type_id 23. They are shown separately from the account-level CertificationSubmissions detail row until iDSS confirms the relationship.
+                </p>
+                <div className="mt-3 overflow-auto">
+                  <table className="w-full min-w-[860px] border-collapse text-left text-sm">
+                    <thead className="text-[#59665d]">
+                      <tr>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">Listing</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">listing_type</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">field_name</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">field_identifier</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">detail_type_id</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {listingCertificationFields.length === 0 ? (
+                        <tr>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 text-sm text-[#59665d]" colSpan={6}>
+                            No listing-level certification fields found.
+                          </td>
+                        </tr>
+                      ) : listingCertificationFields.map(({ listing, field }, index) => (
+                        <tr key={`${getRecordText(listing, "account_listing_id") ?? "listing"}-${getRecordText(field, "field_id") ?? index}`}>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-medium">
+                            {getRecordText(listing, "name") ?? getRecordText(listing, "account_name") ?? "Untitled"}
+                            <span className="block font-mono text-xs text-[#59665d]">
+                              account_listing_id {getRecordText(listing, "account_listing_id") ?? ""}
+                            </span>
+                          </td>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{getRecordText(listing, "listing_type") ?? ""}</td>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{getRecordText(field, "field_name") ?? ""}</td>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-mono text-xs">{getRecordText(field, "field_identifier") ?? ""}</td>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-mono text-xs">{getRecordText(field, "detail_type_id") ?? ""}</td>
+                          <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{formatValue(field.value)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </section>
+
+              <section className="mt-5 border border-[#cdd9cf] bg-[#f7faf7] p-4">
+                <h3 className="text-lg font-semibold">Lodging Details</h3>
+                <div className="mt-3 grid gap-4">
+                  {lodgingListings.length === 0 ? (
+                    <p className="text-sm text-[#59665d]">No lodging listings found.</p>
+                  ) : lodgingListings.map((listing, index) => {
+                    const fields = listing.fields;
+                    const propertyAmenities = getAmenityNamesByGroup(listing, "Property Amenities");
+                    const inRoomAmenities = getAmenityNamesByGroup(listing, "In-Room Amenities");
+                    const accessibilityAmenities = getAmenityNamesByGroup(listing, "Accessibility");
+
+                    return (
+                      <article key={getRecordText(listing, "account_listing_id") ?? index} className="border border-[#cdd9cf] bg-white p-4">
+                        <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                          <div>
+                            <h4 className="text-base font-semibold">
+                              {getRecordText(listing, "name") ?? getRecordText(listing, "account_name") ?? "Untitled lodging listing"}
+                            </h4>
+                            <p className="mt-1 font-mono text-xs text-[#59665d]">
+                              account_listing_id {getRecordText(listing, "account_listing_id") ?? "Missing"}
+                            </p>
+                          </div>
+                          <p className="text-sm text-[#59665d]">
+                            {getRecordText(listing, "summary") ?? getRecordText(listing, "description") ?? ""}
+                          </p>
+                        </div>
+
+                        <dl className="mt-4 grid gap-2 text-sm text-[#59665d] sm:grid-cols-2 lg:grid-cols-4">
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.CheckinTime</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["CheckinTime", "Check-in Time"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.CheckoutTime</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["CheckoutTime", "Check-out Time"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.NumberOfRooms</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["NumberOfRooms", "Number of Rooms"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.NumberOfAccessibleRooms</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["NumberOfAccessibleRooms", "Number of Accessible Rooms"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.NumberOfSingleRooms</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["NumberOfSingleRooms", "Number of Single Rooms"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.NumberOfDoubleRooms</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["NumberOfDoubleRooms", "Number of Double Rooms"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.NumberOfSuites</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["NumberOfSuites", "Number of Suites"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                          <div>
+                            <dt className="font-semibold text-[#18211c]">fields.StarRating</dt>
+                            <dd>{formatValue(getFieldValue(fields, ["StarRating", "Star Rating"]) as JsonValue | undefined) || "Missing"}</dd>
+                          </div>
+                        </dl>
+
+                        <div className="mt-4 grid gap-3 text-sm lg:grid-cols-3">
+                          <div className="border border-[#dfe8e1] bg-[#f7faf7] p-3">
+                            <p className="font-semibold text-[#18211c]">amenities[group_name=&quot;Property Amenities&quot;]</p>
+                            <p className="mt-2 text-xs leading-5 text-[#59665d]">{propertyAmenities.join(", ") || "Missing"}</p>
+                          </div>
+                          <div className="border border-[#dfe8e1] bg-[#f7faf7] p-3">
+                            <p className="font-semibold text-[#18211c]">amenities[group_name=&quot;In-Room Amenities&quot;]</p>
+                            <p className="mt-2 text-xs leading-5 text-[#59665d]">{inRoomAmenities.join(", ") || "Missing"}</p>
+                          </div>
+                          <div className="border border-[#dfe8e1] bg-[#f7faf7] p-3">
+                            <p className="font-semibold text-[#18211c]">amenities[group_name=&quot;Accessibility&quot;]</p>
+                            <p className="mt-2 text-xs leading-5 text-[#59665d]">{accessibilityAmenities.join(", ") || "Missing"}</p>
+                          </div>
+                        </div>
+                      </article>
+                    );
+                  })}
                 </div>
               </section>
 
@@ -904,6 +1040,13 @@ function getFieldValue(fields: JsonValue | undefined, names: string[]) {
   });
 
   return field?.value;
+}
+
+function getAmenityNamesByGroup(record: JsonObject, groupName: string) {
+  return asJsonObjectArray(record.amenities)
+    .filter((amenity) => getRecordText(amenity, "group_name") === groupName && amenity.value === true)
+    .map((amenity) => getRecordText(amenity, "name"))
+    .filter((name): name is string => Boolean(name));
 }
 
 function getNamedValue(record: JsonObject | undefined, keys: string[]) {
