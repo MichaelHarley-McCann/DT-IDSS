@@ -1631,6 +1631,32 @@ export default async function Home() {
           </pre>
         </article>
       </section>
+
+      <style>{`
+        #crowdriff-embed-shell {
+          width: 100%;
+          max-width: 200px;
+          margin: 0 auto;
+          overflow: hidden;
+          background: #000;
+          min-height: 200px;
+        }
+
+        #crowdriff-embed-shell iframe,
+        #crowdriff-embed-shell > div {
+          max-width: 100%;
+        }
+      `}</style>
+
+      <section id="crowdriff-embed-shell" className="mx-auto w-full max-w-[200px] overflow-hidden bg-black">
+        <script
+          id="cr-init__c2360344c58220d5"
+          src="https://starling.crowdriff.com/js/crowdriff.js"
+          async
+        />
+      </section>
       </main>
   );
 }
+
+

@@ -1,0 +1,31 @@
+{
+    "account_space_id": 7,
+    "account_id": 48212,
+    "parent_space_id": null,
+    "name": "Dunder Mifflin Auditorium ",
+    "description": "Description of the Space listing",
+    "abbreviation": null,
+    "area": 1500.00,
+    "area_unit": "feet",
+    "min_occupancy": 100,
+    "max_occupancy": 450,
+    "height": 50.00,
+    "dimension": "100x50",
+    "sort_order": 0,
+    "amenities": [
+        { "name": "InternetAccess", "group_name": "Amenities", "value": true },
+        { "name": "Private Space", "group_name": "Amenities", "value": true },
+        { "name": "Semi-Private Space", "group_name": "Amenities", "value": true },
+        { "name": "Outdoor Space", "group_name": "Amenities", "value": true },
+        { "name": "Wheelchair Accessible", "group_name": "Amenities", "value": true },
+        { "name": "Blackboard", "group_name": "Av Capabilities", "value": true },
+        { "name": "Built-In Screen", "group_name": "Av Capabilities", "value": true },
+        { "name": "Closed-Circuit Television", "group_name": "Av Capabilities", "value": true },
+        { "name": "Dry-Erase Board", "group_name": "Av Capabilities", "value": true },
+        { "name": "DVD Player", "group_name": "Av Capabilities", "value": true },
+        { "name": "Easel", "group_name": "Av Capabilities", "value": true },
+        { "name": "Electric Pointer", "group_name": "Av Capabilities", "value": true },
+        { "name": "Projector Stand", "group_name": "Av Capabilities", "value": true }
+    ],
+    "configurations": []
+}
