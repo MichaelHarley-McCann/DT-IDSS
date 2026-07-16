@@ -11,6 +11,16 @@ type ConsolidatedRecord = JsonObject & {
   _sources: string[];
 };
 
+type AccountRecordGroup = {
+  accountId?: string;
+  account?: JsonObject;
+  listings: JsonObject[];
+  accountDetails: JsonObject[];
+  spaces: JsonObject[];
+  otherRecords: JsonObject[];
+  sources: Set<string>;
+};
+
 type StaticFeed = {
   fileName: string;
   recordCount: number;
@@ -30,6 +40,20 @@ type StaticContentFeed = {
     accountDetails: JsonObject[];
     spaces: JsonObject[];
   };
+};
+
+type ContentfulFieldRow = {
+  field: string;
+  group: string;
+  source: string;
+  contentfulFieldId: string;
+  contentfulType: string;
+  sample?: string;
+  count: number;
+};
+
+type ContentfulFieldInput = Omit<ContentfulFieldRow, "contentfulFieldId" | "contentfulType" | "count"> & {
+  value?: JsonValue;
 };
 
 const STATIC_FEEDS_DIR = path.join(process.cwd(), "data");
@@ -109,23 +133,86 @@ function getRecordId(record: JsonObject, fallback: string) {
   return fallback;
 }
 
+function getRecordAccountId(record: JsonObject) {
+  const value = record.account_id;
+
+  return typeof value === "string" || typeof value === "number" ? String(value) : undefined;
+}
+
+function isAccountRecord(record: JsonObject) {
+  return record.account_id !== undefined &&
+    record.account_name !== undefined &&
+    record.account_listing_id === undefined &&
+    record.detail_id === undefined &&
+    record.account_space_id === undefined;
+}
+
+function isListingRecord(record: JsonObject) {
+  return record.account_listing_id !== undefined;
+}
+
+function isAccountDetailRecord(record: JsonObject) {
+  return record.detail_type_name !== undefined;
+}
+
+function isSpaceRecord(record: JsonObject) {
+  return record.account_space_id !== undefined || record.detail_space_id !== undefined;
+}
+
+function createAccountRecordGroup(accountId?: string): AccountRecordGroup {
+  return {
+    accountId,
+    listings: [],
+    accountDetails: [],
+    spaces: [],
+    otherRecords: [],
+    sources: new Set<string>(),
+  };
+}
+
 function mergeRecords(feeds: StaticFeed[]) {
-  const records = new Map<string, ConsolidatedRecord>();
+  const records = new Map<string, AccountRecordGroup>();
 
   feeds.forEach((feed) => {
     feed.records.forEach((record, index) => {
-      const id = getRecordId(record, `${feed.fileName}:${index + 1}`);
-      const existing = records.get(id) ?? { _sources: [] };
+      const accountId = getRecordAccountId(record);
+      const id = accountId ? `account_id:${accountId}` : getRecordId(record, `${feed.fileName}:${index + 1}`);
+      const existing = records.get(id) ?? createAccountRecordGroup(accountId);
 
-      records.set(id, {
-        ...existing,
-        ...record,
-        _sources: [...new Set([...existing._sources, feed.fileName])],
-      });
+      existing.sources.add(feed.fileName);
+
+      if (isAccountRecord(record)) {
+        existing.account = { ...existing.account, ...record };
+      } else if (isListingRecord(record)) {
+        existing.listings.push(record);
+      } else if (isAccountDetailRecord(record)) {
+        existing.accountDetails.push(record);
+      } else if (isSpaceRecord(record)) {
+        existing.spaces.push(record);
+      } else {
+        existing.otherRecords.push(record);
+      }
+
+      records.set(id, existing);
     });
   });
 
-  return [...records.entries()].map(([id, record]) => ({ id, record }));
+  return [...records.entries()].map(([id, group]) => {
+    const record: ConsolidatedRecord = {
+      account_id: group.accountId ?? null,
+      account: group.account ?? null,
+      listings: getSortedRecords(group.listings, "account_listing_id"),
+      accountDetails: getSortedRecords(group.accountDetails, "detail_type_id"),
+      spaces: getSortedRecords(group.spaces),
+      otherRecords: group.otherRecords,
+      listing_count: group.listings.length,
+      detail_count: group.accountDetails.length,
+      space_count: group.spaces.length,
+      _sources: [...group.sources].sort((first, second) => first.localeCompare(second)),
+    };
+
+    return { id, record };
+  });
 }
 
 function getFieldCoverage(records: { id: string; record: ConsolidatedRecord }[]) {
@@ -150,6 +237,199 @@ function formatValue(value: JsonValue | string[] | undefined) {
   const text = typeof value === "object" ? JSON.stringify(value) : String(value);
 
   return text.length > 140 ? `${text.slice(0, 137)}...` : text;
+}
+
+function getContentfulFieldType(field: string, value?: JsonValue) {
+  const normalizedField = field.toLowerCase();
+
+  if (typeof value === "boolean") {
+    return "Boolean";
+  }
+
+  if (typeof value === "number") {
+    return Number.isInteger(value) ? "Integer" : "Number";
+  }
+
+  if (Array.isArray(value)) {
+    return field.includes("images") || field.includes("files") ? "Media, many files" : "JSON object";
+  }
+
+  if (typeof value === "string") {
+    const normalizedValue = value.trim().toLowerCase();
+
+    if (["true", "false", "yes", "no", "0", "1"].includes(normalizedValue) && normalizedField.includes("check")) {
+      return "Boolean";
+    }
+  }
+
+  if (normalizedField.includes("date")) {
+    return "Date";
+  }
+
+  if (normalizedField.includes("url") || normalizedField.includes("website")) {
+    return "Short text, URL";
+  }
+
+  if (normalizedField.includes("description") || normalizedField.includes("summary") || normalizedField.includes("comments")) {
+    return "Long text";
+  }
+
+  if (normalizedField.endsWith("_id") || normalizedField.includes(".id") || normalizedField.includes("parent_")) {
+    return "Integer";
+  }
+
+  if (normalizedField.includes("sort_order") || normalizedField.includes("occupancy") || normalizedField.includes("area") || normalizedField.includes("height")) {
+    return "Number";
+  }
+
+  return "Short text";
+}
+
+function toContentfulFieldId(field: string) {
+  const sourceIdentifier = field.match(/field_identifier="([^"]+)"/)?.[1] ?? field;
+  const words = sourceIdentifier
+    .replace(/\[.*?\]/g, " ")
+    .replace(/[^a-zA-Z0-9]+/g, " ")
+    .trim()
+    .split(/\s+/);
+  const fieldId = words
+    .map((word, index) => {
+      const normalized = word.replace(/^[0-9]+/, "");
+
+      if (!normalized) {
+        return "";
+      }
+
+      return index === 0
+        ? normalized.charAt(0).toLowerCase() + normalized.slice(1)
+        : normalized.charAt(0).toUpperCase() + normalized.slice(1);
+    })
+    .join("")
+    .slice(0, 64);
+
+  return /^[a-zA-Z]/.test(fieldId) ? fieldId : `field${fieldId.charAt(0).toUpperCase()}${fieldId.slice(1)}`;
+}
+
+function getSampleValue(value: JsonValue | undefined) {
+  if (value === undefined || value === null || value === "") {
+    return undefined;
+  }
+
+  return formatValue(value);
+}
+
+function addContentfulFieldRow(rows: Map<string, ContentfulFieldRow>, row: ContentfulFieldInput) {
+  const key = `${row.source}:${row.field}`;
+  const existing = rows.get(key);
+
+  if (existing) {
+    rows.set(key, {
+      ...existing,
+      sample: existing.sample ?? row.sample,
+      count: existing.count + 1,
+    });
+    return;
+  }
+
+  rows.set(key, {
+    field: row.field,
+    group: row.group,
+    source: row.source,
+    sample: row.sample,
+    count: 1,
+    contentfulFieldId: toContentfulFieldId(row.field),
+    contentfulType: getContentfulFieldType(row.field, row.value),
+  });
+}
+
+function addObjectFieldRows(rows: Map<string, ContentfulFieldRow>, record: JsonObject, group: string, source: string, prefix = "") {
+  for (const [key, value] of Object.entries(record)) {
+    const field = prefix ? `${prefix}.${key}` : key;
+
+    addContentfulFieldRow(rows, {
+      field,
+      group,
+      source,
+      value,
+      sample: getSampleValue(value),
+    });
+
+    if (Array.isArray(value)) {
+      addContentfulFieldRow(rows, {
+        field: `${field}[]`,
+        group,
+        source,
+        value,
+        sample: getSampleValue(value),
+      });
+
+      value.filter(isJsonObject).forEach((item) => addObjectFieldRows(rows, item, group, source, `${field}[]`));
+    }
+  }
+}
+
+function getFeedRecordGroup(record: JsonObject) {
+  if (isAccountRecord(record)) {
+    return "account";
+  }
+
+  if (isListingRecord(record)) {
+    return "listing";
+  }
+
+  if (isAccountDetailRecord(record)) {
+    return `account detail: ${getRecordText(record, "detail_type_name") ?? "unknown"}`;
+  }
+
+  if (isSpaceRecord(record)) {
+    return "space";
+  }
+
+  return "other";
+}
+
+function addNamedFieldValueRows(rows: Map<string, ContentfulFieldRow>, record: JsonObject, group: string, source: string) {
+  asJsonObjectArray(record.fields).forEach((field, index) => {
+    const fieldKey = getRecordText(field, "field_identifier") || getRecordText(field, "field_name") || `field_${index + 1}`;
+    const fieldType = getRecordText(field, "field_type");
+    const path = `${group}.fields[field_identifier="${fieldKey}"].value`;
+    const value = field.value;
+
+    addContentfulFieldRow(rows, {
+      field: path,
+      group,
+      source,
+      value,
+      sample: getSampleValue(value),
+    });
+
+    if (fieldType) {
+      addContentfulFieldRow(rows, {
+        field: `${path} source type`,
+        group,
+        source,
+        value: fieldType,
+        sample: fieldType,
+      });
+    }
+  });
+}
+
+function buildContentfulFieldRows(feeds: StaticFeed[]) {
+  const rows = new Map<string, ContentfulFieldRow>();
+
+  feeds.filter((feed) => !feed.error).forEach((feed) => {
+    feed.records.forEach((record) => {
+      const group = getFeedRecordGroup(record);
+
+      addObjectFieldRows(rows, record, group, feed.fileName);
+      addNamedFieldValueRows(rows, record, group, feed.fileName);
+    });
+  });
+
+  return [...rows.values()].sort((first, second) =>
+    first.group.localeCompare(second.group) || first.field.localeCompare(second.field),
+  );
 }
 
 async function readStaticFeeds(): Promise<StaticFeed[]> {
@@ -196,6 +476,7 @@ export default async function StaticFeedsPage() {
     ["Destination Pass", getFieldValue(accountLayout?.fields, ["destination_pass_participation", "Destination Program Participation"])],
   ];
   const consolidatedRecords = mergeRecords(feeds.filter((feed) => !feed.error));
+  const contentfulRows = buildContentfulFieldRows(feeds);
   const fieldCoverage = getFieldCoverage(consolidatedRecords);
   const visibleFields = fieldCoverage
     .map(({ field }) => field)
@@ -217,6 +498,9 @@ export default async function StaticFeedsPage() {
               <p className="mt-4 max-w-2xl text-base leading-7 text-[#59665d]">
                 Drop provided JSON files into data and this page will normalize top-level records, merge shared identifiers, and surface field coverage.
               </p>
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-[#59665d]">
+                The consolidation logic reads all provided JSON feeds, normalizes each file into records, detects each record type by its fields, and combines related records by account_id. Listings, account details, and spaces are kept as separate arrays under the account rather than forced into a legacy hierarchy. Category values are preserved as a flat categories[] array exactly as provided by the source feed.
+              </p>
             </div>
 
             <dl className="grid grid-cols-3 gap-3 text-sm sm:min-w-[420px]">
@@ -230,7 +514,7 @@ export default async function StaticFeedsPage() {
               </div>
               <div className="border border-[#b8c8bb] bg-white/70 p-4">
                 <dt className="text-[#59665d]">Fields</dt>
-                <dd className="mt-2 text-3xl font-semibold">{fieldCoverage.length}</dd>
+                <dd className="mt-2 text-3xl font-semibold">{contentfulRows.length}</dd>
               </div>
             </dl>
           </div>
@@ -341,8 +625,7 @@ export default async function StaticFeedsPage() {
                       <tr>
                         <th className="border-b border-[#cdd9cf] py-2 pr-4">Listing</th>
                         <th className="border-b border-[#cdd9cf] py-2 pr-4">Type</th>
-                        <th className="border-b border-[#cdd9cf] py-2 pr-4">Category</th>
-                        <th className="border-b border-[#cdd9cf] py-2 pr-4">Subcategory</th>
+                        <th className="border-b border-[#cdd9cf] py-2 pr-4">categories[]</th>
                         <th className="border-b border-[#cdd9cf] py-2 pr-4">Geo code</th>
                         <th className="border-b border-[#cdd9cf] py-2 pr-4">Summary</th>
                         <th className="border-b border-[#cdd9cf] py-2 pr-4">Images</th>
@@ -351,8 +634,6 @@ export default async function StaticFeedsPage() {
                     <tbody>
                       {staticContentFeed.listings.map((listing, index) => {
                         const categories = asJsonObjectArray(listing.categories);
-                        const category = categories[0];
-                        const subcategory = categories[1];
                         const geoCodes = asJsonObjectArray(listing.geo_codes);
                         const images = asJsonObjectArray(listing.images);
 
@@ -366,16 +647,15 @@ export default async function StaticFeedsPage() {
                             </td>
                             <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{getRecordText(listing, "listing_type") ?? ""}</td>
                             <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">
-                              {getRecordText(category, "category_name") ?? ""}
-                              <span className="block font-mono text-xs text-[#59665d]">
-                                {getRecordText(category, "category_id") ?? ""}
-                              </span>
-                            </td>
-                            <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">
-                              {getRecordText(subcategory, "category_name") ?? ""}
-                              <span className="block font-mono text-xs text-[#59665d]">
-                                {getRecordText(subcategory, "category_id") ?? ""}
-                              </span>
+                              {categories.map((category, categoryIndex) => (
+                                <span key={`${getRecordText(category, "category_id") ?? categoryIndex}-${categoryIndex}`} className="mb-2 block last:mb-0">
+                                  {getRecordText(category, "category_name") ?? ""}
+                                  <span className="block font-mono text-xs text-[#59665d]">
+                                    categories[{categoryIndex}].category_id {getRecordText(category, "category_id") ?? ""}
+                                    {getRecordText(category, "sort_order") ? `, sort_order ${getRecordText(category, "sort_order")}` : ""}
+                                  </span>
+                                </span>
+                              ))}
                             </td>
                             <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">
                               {geoCodes.map((geoCode) => (
@@ -484,9 +764,60 @@ export default async function StaticFeedsPage() {
               </div>
             </article>
 
+            <article className="border border-[#8fa997] bg-white/80 p-5 shadow-sm">
+              <div className="max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#51705a]">
+                  Contentful Field Output
+                </p>
+                <h2 className="mt-2 text-2xl font-semibold tracking-tight">Raw source fields for import modeling</h2>
+                <p className="mt-2 text-sm leading-6 text-[#59665d]">
+                  Use this as the field creation checklist. It includes raw feed paths, repeated custom fields by identifier, suggested Contentful field IDs, inferred types, and sample values.
+                </p>
+              </div>
+
+              <div className="mt-5 overflow-auto">
+                <table className="w-full min-w-[1280px] border-collapse text-left text-sm">
+                  <thead className="text-[#59665d]">
+                    <tr>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Contentful field ID</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Type</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Source path</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Group</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Feed</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Rows</th>
+                      <th className="border-b border-[#cdd9cf] py-2 pr-4">Sample</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {contentfulRows.map((row) => (
+                      <tr key={`${row.source}-${row.field}`}>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-mono text-xs">
+                          {row.contentfulFieldId}
+                        </td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-medium">
+                          {row.contentfulType}
+                        </td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-mono text-xs">
+                          {row.field}
+                        </td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{row.group}</td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top font-mono text-xs">
+                          {row.source}
+                        </td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top">{row.count}</td>
+                        <td className="border-b border-[#dfe8e1] py-2 pr-4 align-top text-xs text-[#59665d]">
+                          {row.sample ?? ""}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </article>
+
             <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
               <article className="border border-[#8fa997] bg-white/80 p-5 shadow-sm">
-                <h2 className="text-2xl font-semibold tracking-tight">Field coverage</h2>
+                <h2 className="text-2xl font-semibold tracking-tight">Consolidated field coverage</h2>
                 <div className="mt-4 max-h-[520px] overflow-auto">
                   <table className="w-full border-collapse text-left text-sm">
                     <thead className="text-[#59665d]">

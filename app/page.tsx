@@ -143,404 +143,36 @@ const endpoints: IdssEndpoint[] = [
   },
 ];
 
-const oldListing = {
-  _id: "68cb0862ee7b3ba687972299",
-  social: [
-    { fieldname: "URL", value: "Toronto Marriott City Centre Hotel", smfieldid: 7, smserviceid: 4 },
-    { fieldname: "URL", value: "torontomarriottcc", smfieldid: 7, smserviceid: 13 },
-    { fieldname: "URL", value: "torontomarriottcc", smfieldid: 7, smserviceid: 24 },
-  ],
-  taid: 155586,
-  taoptin: false,
-  zip: "M5V 1J1",
-  contact_email: "erin.dumont@larcohotels.com",
-  address1: "1 Blue Jays Way",
-  media: [
-    {
-      mediaid: 17280,
-      mediafile: "original_MH_YYZCC_Concierge_King_E40F06D8-5919-47D8-8F38F3AFE8255657.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Concierge_King_E40F06D8-5919-47D8-8F38F3AFE8255657_73ed5b10-2c9b-456e-9a41318505171d6d.jpg",
-      sortorder: 1,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Concierge_King_E40F06D8-5919-47D8-8F38F3AFE8255657_73ed5b10-2c9b-456e-9a41318505171d6d.jpg",
-      medianame: "Concierge King",
-      mediatype: "Image",
-    },
-    {
-      mediathumbfile: "thumb_Renaissance_Pool_09370.jpg",
-      mediaid: 7890,
-      mediafile: "original_Renaissance_Pool_09370.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/Renaissance_Pool_09370_5eeb7443-5056-a36f-23f393c57853c761.jpg",
-      sortorder: 2,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/Renaissance_Pool_09370_5eeb7443-5056-a36f-23f393c57853c761.jpg",
-      medianame: "Our Pool",
-      mediatype: "Image",
-    },
-    {
-      mediathumbfile: "thumb_renaissance_Gym_08710.jpg",
-      mediaid: 7891,
-      mediafile: "original_renaissance_Gym_08710.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/renaissance_Gym_08710_5eeb6bd5-5056-a36f-23d966a7f42e1ff4.jpg",
-      sortorder: 3,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/renaissance_Gym_08710_5eeb6bd5-5056-a36f-23d966a7f42e1ff4.jpg",
-      medianame: "Our Gym",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 14513,
-      mediafile: "original_MH_YYZCC_SPORTSNET_Bar_8DC764FB-A4AA-4754-BE8D37DF5EDE2FC5.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_SPORTSNET_Bar_8DC764FB-A4AA-4754-BE8D37DF5EDE2FC5_4d6910ae-9798-4fb1-8ed2300d598c374a.jpg",
-      sortorder: 5,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_SPORTSNET_Bar_8DC764FB-A4AA-4754-BE8D37DF5EDE2FC5_4d6910ae-9798-4fb1-8ed2300d598c374a.jpg",
-      medianame: "Sportsnet Grill",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 17281,
-      mediafile: "original_MH_YYZCC_Standard_Double_CityView_View_6BC841BC-9A84-4ABB-8E8262E86781B1D9.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Standard_Double_CityView_View_6BC841BC-9A84-4ABB-8E8262E86781B1D9_229c819e-b715-4250-9c91a574a52344e4.jpg",
-      sortorder: 6,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Standard_Double_CityView_View_6BC841BC-9A84-4ABB-8E8262E86781B1D9_229c819e-b715-4250-9c91a574a52344e4.jpg",
-      medianame: "Standard Double Cityview Room",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 17282,
-      mediafile: "original_008_Northem-Light-Ballroom-Theatre-Set-Up_6161_42DD2AAA-245E-427E-86D1543B78B41AF4.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/008_Northem-Light-Ballroom-Theatre-Set-Up_6161_42DD2AAA-245E-427E-86D1543B78B41AF4_a5ff22e9-8431-4064-bfd18949526045b5.jpg",
-      sortorder: 7,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/008_Northem-Light-Ballroom-Theatre-Set-Up_6161_42DD2AAA-245E-427E-86D1543B78B41AF4_a5ff22e9-8431-4064-bfd18949526045b5.jpg",
-      medianame: "Northern Lights Ballroom",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 17283,
-      mediafile: "original_010_Aurora-Room_6351_E97FD0B0-EBBA-44A8-B88A941E13E25B13.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/010_Aurora-Room_6351_E97FD0B0-EBBA-44A8-B88A941E13E25B13_52e91dd0-2479-44a8-becfc6b571e30b7d.jpg",
-      sortorder: 8,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/010_Aurora-Room_6351_E97FD0B0-EBBA-44A8-B88A941E13E25B13_52e91dd0-2479-44a8-becfc6b571e30b7d.jpg",
-      medianame: "Aurora Room",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 18058,
-      mediafile: "original_MH_YYZCC_Split_Level_1Queen_Fieldview_879A3FC3-A1BC-4941-AFE07569A7F7049B.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Split_Level_1Queen_Fieldview_879A3FC3-A1BC-4941-AFE07569A7F7049B_311e1ca3-4cce-4cc4-bbf741f7700a9968.jpg",
-      sortorder: 10,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Split_Level_1Queen_Fieldview_879A3FC3-A1BC-4941-AFE07569A7F7049B_311e1ca3-4cce-4cc4-bbf741f7700a9968.jpg",
-      medianame: "Fieldview Room",
-      mediatype: "Image",
-    },
-    {
-      mediaid: 18059,
-      mediafile: "original_MH_YYZCC_Standard_King_Fieldview_89BF8F29-AE79-4DDF-B3D8E23861D45516.jpg",
-      mediaurl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Standard_King_Fieldview_89BF8F29-AE79-4DDF-B3D8E23861D45516_e49a51f2-5b10-445d-a962780935e8d0d1.jpg",
-      sortorder: 11,
-      mediathumburl: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Standard_King_Fieldview_89BF8F29-AE79-4DDF-B3D8E23861D45516_e49a51f2-5b10-445d-a962780935e8d0d1.jpg",
-      medianame: "Fieldview Standard",
-      mediatype: "Image",
-    },
-  ],
-  region: "City Center",
-  fax: "416-341-5091",
-  typeid: 16,
-  company: "Toronto Marriott City Centre Hotel",
-  listingudfs: [
-    {
-      name: "Shortlisting",
-      value: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ...",
-      digits: 0,
-      fieldid: 4007,
-      typeid: 9,
-      type: "Text Area",
-      value_raw: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ...",
-      value_string: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ...",
-    },
-    {
-      name: "Randomized Listing Order",
-      value: 1404,
-      digits: 0,
-      fieldid: 4816,
-      typeid: 4,
-      type: "Number",
-      value_raw: 1404,
-      value_string: "1404",
-    },
-  ],
-  altphone: "1 800 237-1512",
-  tacatid: 1,
-  accountudfs: [
-    { listid: 969, name: "RTO", value: "RTO - T", digits: 0, fieldid: 4029, typeid: 7, type: "Dropdown", value_raw: { listid: 969, value: "RTO - T" }, value_string: "RTO - T" },
-    { listid: 2531, name: "Membership Type", value: "Business Membership", digits: 0, fieldid: 4801, typeid: 7, type: "Dropdown", value_raw: { listid: 2531, value: "Business Membership" }, value_string: "Business Membership" },
-    { listid: 2108, name: "Membership Pipeline", value: "Renewed", digits: 0, fieldid: 4839, typeid: 7, type: "Dropdown", value_raw: { listid: 2108, value: "Renewed" }, value_string: "Renewed" },
-    { listid: 2664, name: "Primary Business Type", value: "Accommodations", digits: 0, fieldid: 4977, typeid: 7, type: "Dropdown", value_raw: { listid: 2664, value: "Accommodations" }, value_string: "Accommodations" },
-  ],
-  description: "The world's first and only 4 diamond hotel connected to a domed sports and entertainment facility with 55 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for groups of up to 30. You will find this property next to the Metro Toronto Convention Centre, the CN Tower and Ripley's Aquarium. On the edge of Toronto's financial core and in the heart of the entertainment district. Where business and pleasure meet.",
-  fullname: "Erin Dumont",
-  city: "Toronto",
-  acctid: 37,
-  sortcompany: "toronto marriott city centre hotel",
-  typename: "Content Hub Listing",
-  rankorder: 1,
-  state: "ON",
-  fname: "Erin",
-  recid: 29178,
-  weburl: "https://www.marriott.com/hotels/travel/yyzcc-toronto-marriott-city-centre-hotel/",
-  status: "Active",
-  meetingfacility: {
-    additional: [
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "4066", label: "Total Sq. Ft. Ballroom", shortname: "ballroomsize", amenitygroupid: 2, digits: 1, fieldid: 114, typeid: 4, type: "Number", value_raw: 4066, value_string: "4066.0" },
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "true", label: "Exhibit Space", shortname: "exhibitspace", amenitygroupid: 2, digits: 0, fieldid: 115, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes" },
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/", label: "Floorplan (URL)", shortname: "floorplan", amenitygroupid: 2, digits: 0, fieldid: 56, typeid: 10, type: "URL", value_raw: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/", value_string: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/" },
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "4066", label: "Largest Room Sq. Ft.", shortname: "largestroomsize", amenitygroupid: 2, digits: 1, fieldid: 113, typeid: 4, type: "Number", value_raw: 4066, value_string: "4066.0" },
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "12224", label: "Total Meeting Space Sq. Ft.", shortname: "meetingspacesize", amenitygroupid: 2, digits: 1, fieldid: 112, typeid: 4, type: "Number", value_raw: 12224, value_string: "12224.0" },
-      { tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "10", label: "Number of Meeting Rooms", shortname: "totalmeetingrooms", amenitygroupid: 2, digits: 0, fieldid: 111, typeid: 4, type: "Number", value_raw: 10, value_string: "10" },
-      { listid: 17, tabshortname: "custommeetingfacilities", amenitytabid: 999, value: "100-199", label: "Guest Capacity", shortname: "guestcapacity", amenitygroupid: 2, digits: 0, fieldid: 126, typeid: 7, type: "Dropdown", value_raw: { listid: 17, value: "100-199" }, value_string: "100-199" },
-    ],
-    exhibitspace: 1,
-    numrooms: 10,
-    largestroom: 4066,
-    totalsqft: 12224,
-    additional_object: {
-      ballroomsize: { value: "4066", label: "Total Sq. Ft. Ballroom", shortname: "ballroomsize", fieldid: 114, typeid: 4, type: "Number", value_raw: 4066, value_string: "4066.0" },
-      exhibitspace: { value: "true", label: "Exhibit Space", shortname: "exhibitspace", fieldid: 115, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes" },
-      floorplan: { value: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/", label: "Floorplan (URL)", shortname: "floorplan", fieldid: 56, typeid: 10, type: "URL", value_raw: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/", value_string: "https://www.marriott.com/en-us/hotels/yyzcc-toronto-marriott-city-centre-hotel/events/" },
-      largestroomsize: { value: "4066", label: "Largest Room Sq. Ft.", shortname: "largestroomsize", fieldid: 113, typeid: 4, type: "Number", value_raw: 4066, value_string: "4066.0" },
-      meetingspacesize: { value: "12224", label: "Total Meeting Space Sq. Ft.", shortname: "meetingspacesize", fieldid: 112, typeid: 4, type: "Number", value_raw: 12224, value_string: "12224.0" },
-      totalmeetingrooms: { value: "10", label: "Number of Meeting Rooms", shortname: "totalmeetingrooms", fieldid: 111, typeid: 4, type: "Number", value_raw: 10, value_string: "10" },
-      guestcapacity: { listid: 17, value: "100-199", label: "Guest Capacity", shortname: "guestcapacity", fieldid: 126, typeid: 7, type: "Dropdown", value_raw: { listid: 17, value: "100-199" }, value_string: "100-199" },
-    },
-  },
-  phone: "416 341-7100",
-  addressid: 17,
-  amenities_array: [
-    { tabshortname: "general", amenitytabid: 1, value: "true", label: "Delivery Available", shortname: "deliveryavailable", amenitygroupid: 33, digits: 0, fieldid: 286, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_deliveryavailable" },
-    { tabshortname: "general", amenitytabid: 1, value: "true", label: "Full Buyouts", shortname: "fullbuyouts", amenitygroupid: 33, digits: 0, fieldid: 308, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_fullbuyouts" },
-    { tabshortname: "general", amenitytabid: 1, value: "true", label: "Patio Dining", shortname: "patiodining", amenitygroupid: 33, digits: 0, fieldid: 277, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_patiodining" },
-    { tabshortname: "general", amenitytabid: 1, value: "true", label: "Private Dining Space", shortname: "privatediningspace", amenitygroupid: 33, digits: 0, fieldid: 306, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_privatediningspace" },
-    { tabshortname: "general", amenitytabid: 1, value: "150", label: "Capacity of Private Dining Space", shortname: "privatediningspacecapacity", amenitygroupid: 33, digits: 0, fieldid: 307, typeid: 8, type: "Text", value_raw: "150", value_string: "150", uniquename: "general_privatediningspacecapacity" },
-    { tabshortname: "accommodations", amenitytabid: 1009, value: "true", label: "Does your property have a fitness centre?", shortname: "fitnesscentre", amenitygroupid: 18, digits: 0, fieldid: 110, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "accommodations_fitnesscentre" },
-    { tabshortname: "accommodations", amenitytabid: 1009, value: "true", label: "Does your property have a pool?", shortname: "pool", amenitygroupid: 18, digits: 0, fieldid: 107, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "accommodations_pool" },
-    { listid: 14, tabshortname: "accommodations", amenitytabid: 1009, value: "Indoor", label: "Pool location", shortname: "location", amenitygroupid: 18, digits: 0, fieldid: 109, typeid: 7, type: "Dropdown", value_raw: { listid: 14, value: "Indoor" }, value_string: "Indoor", uniquename: "accommodations_location" },
-  ],
-  rankname: "Member",
-  crmtracking: {
-    core_itinerary: "58_29178",
-    core_booking_click: "7_29178",
-    custom_referrals_bookdirect_lodging: "112_29178",
-    core_map_view: "59_29178",
-    core_listing_view: "1_29178",
-    core_mobile_view: "17_29178",
-    custom_threshold_360_views: "120_29178",
-    custom_instagram_views: "114_29178",
-    custom_visitapps_listing_view: "111_29178",
-    custom_referrals_bandwango: "124_29178",
-    custom_referrals_bookdirect_activities: "113_29178",
-    core_twitter_view: "12_29178",
-    core_mobile_click: "16_29178",
-    custom_referrals_ticketmaster: "123_29178",
-    custom_core_placeholder: "125_29178",
-    core_listing_click: "4_29178",
-    custom_visitapps_passport_check_in: "110_29178",
-    custom_ticketed_event_referrals: "122_29178",
-    custom_instagram_click_thrus: "115_29178",
-    core_facebook_view: "14_29178",
-    custom_youtube_click_thrus: "117_29178",
-    core_mobile_call: "18_29178",
-    core_facebook_click: "15_29178",
-    custom_youtube_views: "116_29178",
-    custom_referrals_viator: "121_29178",
-    custom_pinterest_views: "118_29178",
-    custom_pinterest_click_thrus: "119_29178",
-    core_twitter_click: "13_29178",
-  },
-  country: "CANADA",
-  tollfree: "1-800-237-1512",
-  lname: "Dumont",
-  rankid: 6,
-  meetingrooms: [
-    { roomname: "Northern Lights Ballroom", roomid: "1596", banquet: "250", height: "14", udfs: [{ name: "U-Shape Capacity", value: 45, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 45, value_string: "45" }], classroom: "150", reception: "300", theater: "320", sqft: "4066", udfs_object: { 4538: { name: "U-Shape Capacity", value: 45, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 45, value_string: "45" } } },
-    { roomname: "Aurora Room", roomid: "1597", banquet: "120", height: "14", udfs: [{ name: "U-Shape Capacity", value: 36, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 36, value_string: "36" }, { name: "Boardroom capacity", value: 28, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 28, value_string: "28" }], classroom: "48", reception: "150", theater: "80", sqft: "2110", udfs_object: { 4538: { name: "U-Shape Capacity", value: 36, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 36, value_string: "36" }, 4539: { name: "Boardroom capacity", value: 28, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 28, value_string: "28" } } },
-    { roomname: "Blue Jays Room", roomid: "1599", banquet: "56", height: "10", udfs: [{ name: "U-Shape Capacity", value: 24, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 24, value_string: "24" }, { name: "Boardroom capacity", value: 20, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 20, value_string: "20" }], classroom: "42", reception: "80", theater: "70", sqft: "1308" },
-    { roomname: "Raptor Room", roomid: "1600", banquet: "64", height: "10", udfs: [{ name: "U-Shape Capacity", value: 36, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 36, value_string: "36" }, { name: "Boardroom capacity", value: 40, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 40, value_string: "40" }], classroom: "60", reception: "80", theater: "100", sqft: "1185" },
-    { roomname: "Maple Leaf Room", roomid: "1601", banquet: "32", height: "10", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 24, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 24, value_string: "24" }], classroom: "24", reception: "40", theater: "40", sqft: "640" },
-    { roomname: "SkyBox 1", roomid: "1602", banquet: "32", height: "8", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 10, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 10, value_string: "10" }], classroom: "24", reception: "25", theater: "10", sqft: "469" },
-    { roomname: "SkyBox 2", roomid: "1603", banquet: "32", height: "7", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 10, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 10, value_string: "10" }], classroom: "24", reception: "25", theater: "10", sqft: "450" },
-    { roomname: "SkyBox 3", roomid: "1604", banquet: "32", height: "7", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 12, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 12, value_string: "12" }], classroom: "24", reception: "25", theater: "12", sqft: "444" },
-    { roomname: "SkyBox 4", roomid: "1605", banquet: "32", height: "8", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 16, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 16, value_string: "16" }], classroom: "24", reception: "30", theater: "16", sqft: "572" },
-    { roomname: "Legends Lounge", roomid: "1606", banquet: "50", height: "8", udfs: [{ name: "U-Shape Capacity", value: 18, digits: 0, fieldid: 4538, typeid: 4, type: "Number", value_raw: 18, value_string: "18" }, { name: "Boardroom capacity", value: 16, digits: 0, fieldid: 4539, typeid: 4, type: "Number", value_raw: 16, value_string: "16" }], classroom: "24", reception: "60", theater: "16", sqft: "980" },
-  ],
-  contactid: 5913,
-  addresstype: "Physical",
-  statusid: 1639,
-  categories: [
-    { primary: true, subcatid: 2670, subcatname: "Hotels", catname: "Accommodations", catid: 226, threshold360id: "8453331", parentid: 14565, title: "Toronto Marriott City Centre Hotel", regionid: 100 },
-  ],
-  social_object: {
-    Facebook: [{ fieldname: "URL", value: "Toronto Marriott City Centre Hotel", smfieldid: 7, smserviceid: 4 }],
-    Instagram: [{ fieldname: "URL", value: "torontomarriottcc", smfieldid: 7, smserviceid: 13 }],
-    TikTok: [{ fieldname: "URL", value: "torontomarriottcc", smfieldid: 7, smserviceid: 24 }],
-  },
-  listingudfs_object: {
-    4007: { name: "Shortlisting", value: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ...", digits: 0, fieldid: 4007, typeid: 9, type: "Text Area", value_raw: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ...", value_string: "The world's first and only 348 guestroom hotel connected to a domed sports and entertainment facility with 70 rooms overlooking the stadium and field. Over 13,000 square feet of flexible meeting space is available along with four Skyboxes for ..." },
-    4816: { name: "Randomized Listing Order", value: 1404, digits: 0, fieldid: 4816, typeid: 4, type: "Number", value_raw: 1404, value_string: "1404" },
-  },
-  accountudfs_object: {
-    4029: { listid: 969, name: "RTO", value: "RTO - T", digits: 0, fieldid: 4029, typeid: 7, type: "Dropdown", value_raw: { listid: 969, value: "RTO - T" }, value_string: "RTO - T" },
-    4801: { listid: 2531, name: "Membership Type", value: "Business Membership", digits: 0, fieldid: 4801, typeid: 7, type: "Dropdown", value_raw: { listid: 2531, value: "Business Membership" }, value_string: "Business Membership" },
-    4839: { listid: 2108, name: "Membership Pipeline", value: "Renewed", digits: 0, fieldid: 4839, typeid: 7, type: "Dropdown", value_raw: { listid: 2108, value: "Renewed" }, value_string: "Renewed" },
-    4977: { listid: 2664, name: "Primary Business Type", value: "Accommodations", digits: 0, fieldid: 4977, typeid: 7, type: "Dropdown", value_raw: { listid: 2664, value: "Accommodations" }, value_string: "Accommodations" },
-  },
-  amenities: {
-    general_deliveryavailable: { value: "true", label: "Delivery Available", shortname: "deliveryavailable", fieldid: 286, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_deliveryavailable" },
-    general_fullbuyouts: { value: "true", label: "Full Buyouts", shortname: "fullbuyouts", fieldid: 308, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_fullbuyouts" },
-    general_patiodining: { value: "true", label: "Patio Dining", shortname: "patiodining", fieldid: 277, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_patiodining" },
-    general_privatediningspace: { value: "true", label: "Private Dining Space", shortname: "privatediningspace", fieldid: 306, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "general_privatediningspace" },
-    general_privatediningspacecapacity: { value: "150", label: "Capacity of Private Dining Space", shortname: "privatediningspacecapacity", fieldid: 307, typeid: 8, type: "Text", value_raw: "150", value_string: "150", uniquename: "general_privatediningspacecapacity" },
-    accommodations_fitnesscentre: { value: "true", label: "Does your property have a fitness centre?", shortname: "fitnesscentre", fieldid: 110, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "accommodations_fitnesscentre" },
-    accommodations_pool: { value: "true", label: "Does your property have a pool?", shortname: "pool", fieldid: 107, typeid: 11, type: "Yes/No", value_raw: true, value_string: "Yes", uniquename: "accommodations_pool" },
-    accommodations_location: { listid: 14, value: "Indoor", label: "Pool location", shortname: "location", fieldid: 109, typeid: 7, type: "Dropdown", value_raw: { listid: 14, value: "Indoor" }, value_string: "Indoor", uniquename: "accommodations_location" },
-  },
-  updated: "2026-06-17T08:17:59.845Z",
-  contacttitle: "Lead Catcher/Sales Coordinator",
-  alpha: "t",
-  loc: { type: "Point", coordinates: [-79.3891419, 43.641804] },
-  sites: ["primary", "maps", "splash", "meetings", "rto5", "inc"],
-  primary_site: "primary",
-  primary_category: { primary: true, subcatid: 2670, subcatname: "Hotels", catname: "Accommodations", catid: 226 },
-  primarycatid: 226,
-  primarysubcatid: 2670,
-  cms_title: "Toronto Marriott City Centre Hotel - Accommodations - Hotels (29178)",
-  cms_title_sort: "toronto marriott city centre hotel - accommodations - hotels (29178)",
-  primary_image_url: "https://assets.simpleviewinc.com/simpleview/image/upload/crm/toronto/MH_YYZCC_Concierge_King_E40F06D8-5919-47D8-8F38F3AFE8255657_73ed5b10-2c9b-456e-9a41318505171d6d.jpg",
-  primary_image_is_default: false,
-  filter_tags: [
-    "site_primary",
-    "catid_226",
-    "subcatid_2670",
-    "site_primary_catid_226",
-    "site_primary_subcatid_2670",
-    "site_primary_catid_226_subcatid_2670",
-    "site_maps",
-    "site_maps_catid_226",
-    "site_maps_subcatid_2670",
-    "site_maps_catid_226_subcatid_2670",
-    "site_splash",
-    "site_splash_catid_226",
-    "site_splash_subcatid_2670",
-    "site_splash_catid_226_subcatid_2670",
-    "site_meetings",
-    "site_meetings_catid_226",
-    "site_meetings_subcatid_2670",
-    "site_meetings_catid_226_subcatid_2670",
-    "site_rto5",
-    "site_rto5_catid_226",
-    "site_rto5_subcatid_2670",
-    "site_rto5_catid_226_subcatid_2670",
-    "site_inc",
-    "site_inc_catid_226",
-    "site_inc_subcatid_2670",
-    "site_inc_subcatid_2670",
-    "site_inc_catid_226_subcatid_2670",
-  ],
-  qualityScore: -1,
-};
-
-const mappingRows = [
+const consolidatedSourceRows = [
   {
-    oldField: "company",
-    source: "Listing endpoint",
-    sourcePath: "account_name",
-    transform: "Rename account_name to company.",
+    section: "listing",
+    source: LISTING_ENDPOINT_PATH,
+    sourcePath: "top-level listing fields",
+    output: "Primary listing record with contact, address, categories, geo_codes, media, fields, and amenities.",
   },
   {
-    oldField: "acctid",
-    source: "Listing endpoint",
-    sourcePath: "account_id",
-    transform: "Rename account_id to acctid.",
+    section: "accountDetails[]",
+    source: ACCOUNT_DETAIL_ENDPOINT_PATH,
+    sourcePath: "detail rows grouped by detail_type_name",
+    output: "Account-level detail records such as General, Meeting Spaces, Certifications, and AccessNow-related fields.",
   },
   {
-    oldField: "recid",
-    source: "Listing endpoint",
-    sourcePath: "account_listing_id",
-    transform: "Closest available listing id. Old recid is not the same identifier family.",
-  },
-  {
-    oldField: "phone / altphone / tollfree / fax",
-    source: "Listing endpoint",
-    sourcePath: "phone, secondary_phone, fax",
-    transform: "Rename and normalize phone formatting.",
-  },
-  {
-    oldField: "weburl",
-    source: "Listing endpoint",
-    sourcePath: "website",
-    transform: "Rename website to weburl.",
-  },
-  {
-    oldField: "social / social_object",
-    source: "Listing endpoint",
-    sourcePath: "facebook, instagram",
-    transform: "Build social array/object and assign service ids separately if needed.",
-  },
-  {
-    oldField: "address1 / city / state / zip / country",
-    source: "Listing endpoint",
-    sourcePath: "street, city, state, postal_code, country",
-    transform: "Rename fields; trim trailing punctuation; convert province/country labels if needed.",
-  },
-  {
-    oldField: "region",
-    source: "Listing endpoint",
-    sourcePath: "geo_codes[0].geo_code_name",
-    transform: "Use first matching geo code, e.g. City Center.",
-  },
-  {
-    oldField: "categories / primary_category / filter_tags",
-    source: "Listing endpoint",
-    sourcePath: "categories[]",
-    transform: "Does not line up 1:1. New API has flat category_id/category_name. Old shape needs catid/subcatid/parent category logic from legacy taxonomy.",
-  },
-  {
-    oldField: "media",
-    source: "Listing endpoint + account detail",
-    sourcePath: "images[] and detail_type_name=General fields with Image_* identifiers",
-    transform: "Map images to mediaid/mediaurl/medianame/sortorder. Old media ids are legacy ids and may not exist in new API.",
-  },
-  {
-    oldField: "listingudfs / listingudfs_object",
-    source: "Account detail endpoint",
-    sourcePath: "detail_type_name=General fields: Shortlisting, Randomized Listing Order",
-    transform: "Convert fields array into array plus object keyed by legacy field id or identifier.",
-  },
-  {
-    oldField: "accountudfs / accountudfs_object",
-    source: "Listing endpoint + account detail endpoint",
-    sourcePath: "fields[] and detail_type_name=Account Layout fields",
-    transform: "Filter account-level fields like RTO, Membership Type, Membership Pipeline, Primary Business Type.",
-  },
-  {
-    oldField: "amenities_array / amenities",
-    source: "Listing endpoint + account detail endpoint",
-    sourcePath: "amenities[] and detail types General/ConsumerAccommodations/GuestServices/Certifications",
-    transform: "Group checkbox/list fields into legacy amenity objects keyed by tab/shortname.",
-  },
-  {
-    oldField: "meetingfacility",
-    source: "Account detail endpoint",
+    section: "meetingFacility",
+    source: ACCOUNT_DETAIL_ENDPOINT_PATH,
     sourcePath: "detail_type_name=Meeting Spaces fields",
-    transform: "Map TotalSqFt, LargestRoom, NumRooms, ExhibitSpace into totalsqft, largestroom, numrooms, exhibitspace.",
+    output: "Summary meeting-space fields lifted from the matching account detail record.",
   },
   {
-    oldField: "meetingrooms",
-    source: "Space endpoint",
-    sourcePath: "spaces filtered to the account/detail meeting space record",
-    transform: "Map space_name, area, height, configs Theater/Classroom/Banquet/Reception into roomname, sqft, height, theater, classroom, banquet, reception.",
+    section: "meetingRooms[]",
+    source: SPACE_ENDPOINT_PATH,
+    sourcePath: "spaces where detail_id matches the Meeting Spaces detail row",
+    output: "Joined room records with dimensions, capacities, configs, fields, and source ids.",
   },
   {
-    oldField: "certifications / green badges / AccessNow fields",
-    source: "Account detail endpoint",
-    sourcePath: "detail_type_name=Certifications and CertificationSubmissions fields",
-    transform: "These are account-level fields; they do not belong to the listing endpoint payload.",
+    section: "sourceData",
+    source: "all live endpoints",
+    sourcePath: "raw listing, accountDetails, spaces, joinedMeetingSpaces",
+    output: "Unmodified source payloads kept beside the mapped sections for traceability.",
   },
 ];
 
@@ -898,10 +530,7 @@ function buildConsolidatedFeed(results: EndpointResult[]) {
   }
 
   const categories = getSortedCategories(listing.categories);
-  const category = categories[0];
-  const subcategory = categories[1];
   const geoCodes = getSortedGeoCodes(listing.geo_codes);
-  const region = geoCodes[0];
 
   return {
     sourceEndpoints: [LISTING_ENDPOINT_PATH, ACCOUNT_DETAIL_ENDPOINT_PATH, SPACE_ENDPOINT_PATH],
@@ -911,7 +540,7 @@ function buildConsolidatedFeed(results: EndpointResult[]) {
       spaces,
       joinedMeetingSpaces: meetingSpaces,
     },
-    account: {
+    listing: {
       account_listing_id: listing.account_listing_id,
       account_id: listing.account_id,
       parent_account_id: listing.parent_account_id,
@@ -952,24 +581,8 @@ function buildConsolidatedFeed(results: EndpointResult[]) {
         latitude: listing.latitude,
         longitude: listing.longitude,
       },
-      geo_code: {
-        geo_code_id: getRecordText(region, "geo_code_id"),
-        geo_code_name: getRecordText(region, "geo_code_name"),
-        parent_id: getRecordText(region, "parent_id"),
-        raw: region ?? null,
-      },
       geo_codes: geoCodes,
       account_types: listing.account_types ?? [],
-      category: {
-        category_id: getRecordText(category, "category_id"),
-        category_name: getRecordText(category, "category_name"),
-        raw: category ?? null,
-      },
-      subcategory: {
-        category_id: getRecordText(subcategory, "category_id"),
-        category_name: getRecordText(subcategory, "category_name"),
-        raw: subcategory ?? null,
-      },
       categories,
       cuisines: listing.cuisines ?? [],
       images: listing.images ?? [],
@@ -1031,6 +644,8 @@ export default async function Home() {
   const successfulRequests = results.filter((result) => result.ok).length;
   const consolidatedFeed = buildConsolidatedFeed(results);
   const contentfulRows = consolidatedFeed ? buildContentfulFieldRows(consolidatedFeed) : [];
+  const primaryCategory = consolidatedFeed?.listing.categories[0];
+  const primaryGeoCode = consolidatedFeed?.listing.geo_codes[0];
 
   return (
     <main className="min-h-screen bg-[#f5f1e8] px-5 py-8 text-[#20201d] sm:px-8 lg:px-12">
@@ -1044,8 +659,7 @@ export default async function Home() {
               Endpoint Connection Check
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-7 text-[#5d584f]">
-              Live listing, account detail, and meeting space records joined into
-              one feed. The old listing below remains a separate reference only.
+              Live listing, account detail, and meeting space records joined into one iDSS feed.
             </p>
           </div>
 
@@ -1066,8 +680,8 @@ export default async function Home() {
             ["#consolidated-feed", "Consolidated Feed"],
             ["#contentful-field-list", "Contentful Field List"],
             ["#raw-endpoints", "Raw Endpoints"],
-            ["#merge-map", "Merge Map"],
-            ["#old-listing", "Old Listing"],
+            ["#source-map", "Source Map"],
+            ["/old-listing", "Old Listing"],
           ].map(([href, label]) => (
             <a
               key={href}
@@ -1086,33 +700,29 @@ export default async function Home() {
                 Consolidated Feed
               </p>
               <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                {consolidatedFeed?.account.account_name ?? "No listing payload"}
+                {consolidatedFeed?.listing.account_name ?? "No listing payload"}
               </h2>
               <p className="mt-2 text-sm leading-6 text-[#625c52]">
-                {consolidatedFeed?.account.description ??
+                {consolidatedFeed?.listing.description ??
                   "The feed can be built after the listing endpoint returns successfully."}
               </p>
             </div>
 
             <dl className="grid gap-2 text-sm text-[#5d584f] sm:grid-cols-2 lg:min-w-[480px]">
               <div>
-                <dt className="font-semibold text-[#20201d]">Account</dt>
-                <dd>{consolidatedFeed?.account.account_id ?? "Missing"}</dd>
+                <dt className="font-semibold text-[#20201d]">listing.account_id</dt>
+                <dd>{consolidatedFeed?.listing.account_id ?? "Missing"}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#20201d]">categories[0].category_name</dt>
-                <dd>{consolidatedFeed?.account.category.category_name ?? "Missing"}</dd>
+                <dt className="font-semibold text-[#20201d]">listing.categories[0].category_name</dt>
+                <dd>{getRecordText(primaryCategory, "category_name") ?? "Missing"}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#20201d]">categories[1].category_name</dt>
-                <dd>{consolidatedFeed?.account.subcategory.category_name ?? "Missing"}</dd>
+                <dt className="font-semibold text-[#20201d]">listing.geo_codes[0].geo_code_name</dt>
+                <dd>{getRecordText(primaryGeoCode, "geo_code_name") ?? "Missing"}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#20201d]">geo_codes[0].geo_code_name</dt>
-                <dd>{consolidatedFeed?.account.geo_code.geo_code_name ?? "Missing"}</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-[#20201d]">Joined rooms</dt>
+                <dt className="font-semibold text-[#20201d]">meetingRooms.length</dt>
                 <dd>{consolidatedFeed?.meetingRooms.length ?? 0}</dd>
               </div>
             </dl>
@@ -1120,73 +730,69 @@ export default async function Home() {
 
           <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
             <section className="border border-[#d9d0bd] bg-white/70 p-4">
-              <h3 className="text-lg font-semibold">Live Summary</h3>
+              <h3 className="text-lg font-semibold">listing</h3>
               <dl className="mt-3 grid gap-2 text-sm text-[#5d584f] sm:grid-cols-2">
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Listing</dt>
-                  <dd>{consolidatedFeed?.account.account_listing_id ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.account_listing_id</dt>
+                  <dd>{consolidatedFeed?.listing.account_listing_id ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Website</dt>
-                  <dd className="break-all">{consolidatedFeed?.account.website ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.website</dt>
+                  <dd className="break-all">{consolidatedFeed?.listing.website ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Phone</dt>
-                  <dd>{consolidatedFeed?.account.phone ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.phone</dt>
+                  <dd>{consolidatedFeed?.listing.phone ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Email</dt>
-                  <dd className="break-all">{consolidatedFeed?.account.email ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.email</dt>
+                  <dd className="break-all">{consolidatedFeed?.listing.email ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">categories[0].category_id</dt>
-                  <dd>{consolidatedFeed?.account.category.category_id ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.categories[0].category_id</dt>
+                  <dd>{getRecordText(primaryCategory, "category_id") ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">categories[1].category_id</dt>
-                  <dd>{consolidatedFeed?.account.subcategory.category_id ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.geo_codes[0].geo_code_id</dt>
+                  <dd>{getRecordText(primaryGeoCode, "geo_code_id") ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">geo_codes[0].geo_code_id</dt>
-                  <dd>{consolidatedFeed?.account.geo_code.geo_code_id ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.geo_codes[0].parent_id</dt>
+                  <dd>{getRecordText(primaryGeoCode, "parent_id") ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">geo_codes[0].parent_id</dt>
-                  <dd>{consolidatedFeed?.account.geo_code.parent_id ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.geo_codes.length</dt>
+                  <dd>{consolidatedFeed?.listing.geo_codes.length ?? 0}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">geo_codes.length</dt>
-                  <dd>{consolidatedFeed?.account.geo_codes.length ?? 0}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.account_types.length</dt>
+                  <dd>{consolidatedFeed?.listing.account_types.length ?? 0}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">account_types.length</dt>
-                  <dd>{consolidatedFeed?.account.account_types.length ?? 0}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Detail Rows</dt>
+                  <dt className="font-semibold text-[#20201d]">sourceData.accountDetails.length</dt>
                   <dd>{consolidatedFeed?.sourceData.accountDetails.length ?? 0}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Space Rows</dt>
+                  <dt className="font-semibold text-[#20201d]">sourceData.spaces.length</dt>
                   <dd>{consolidatedFeed?.sourceData.spaces.length ?? 0}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Latitude</dt>
-                  <dd>{consolidatedFeed?.account.address.latitude ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.address.latitude</dt>
+                  <dd>{consolidatedFeed?.listing.address.latitude ?? "Missing"}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Longitude</dt>
-                  <dd>{consolidatedFeed?.account.address.longitude ?? "Missing"}</dd>
+                  <dt className="font-semibold text-[#20201d]">listing.address.longitude</dt>
+                  <dd>{consolidatedFeed?.listing.address.longitude ?? "Missing"}</dd>
                 </div>
                 <div className="sm:col-span-2">
-                  <dt className="font-semibold text-[#20201d]">Address</dt>
+                  <dt className="font-semibold text-[#20201d]">listing.address</dt>
                   <dd>
                     {[
-                      consolidatedFeed?.account.address.street,
-                      consolidatedFeed?.account.address.city,
-                      consolidatedFeed?.account.address.state,
-                      consolidatedFeed?.account.address.postal_code,
-                      consolidatedFeed?.account.address.country,
+                      consolidatedFeed?.listing.address.street,
+                      consolidatedFeed?.listing.address.city,
+                      consolidatedFeed?.listing.address.state,
+                      consolidatedFeed?.listing.address.postal_code,
+                      consolidatedFeed?.listing.address.country,
                     ]
                       .filter(Boolean)
                       .join(", ") || "Missing"}
@@ -1196,22 +802,22 @@ export default async function Home() {
             </section>
 
             <section className="border border-[#d9d0bd] bg-white/70 p-4">
-              <h3 className="text-lg font-semibold">Meeting Facility</h3>
+              <h3 className="text-lg font-semibold">meetingFacility</h3>
               <dl className="mt-3 grid gap-2 text-sm text-[#5d584f] sm:grid-cols-2">
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Total Sq. Ft.</dt>
+                  <dt className="font-semibold text-[#20201d]">meetingFacility.totalSqFt</dt>
                   <dd>{String(consolidatedFeed?.meetingFacility?.totalSqFt ?? "Missing")}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Largest Room</dt>
+                  <dt className="font-semibold text-[#20201d]">meetingFacility.largestRoom</dt>
                   <dd>{String(consolidatedFeed?.meetingFacility?.largestRoom ?? "Missing")}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Meeting Rooms</dt>
+                  <dt className="font-semibold text-[#20201d]">meetingFacility.numberOfRooms</dt>
                   <dd>{String(consolidatedFeed?.meetingFacility?.numberOfRooms ?? "Missing")}</dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#20201d]">Exhibit Space</dt>
+                  <dt className="font-semibold text-[#20201d]">meetingFacility.exhibitSpace</dt>
                   <dd>{String(consolidatedFeed?.meetingFacility?.exhibitSpace ?? "Missing")}</dd>
                 </div>
               </dl>
@@ -1219,23 +825,23 @@ export default async function Home() {
           </div>
 
           <section className="mt-5 border border-[#d9d0bd] bg-white/70 p-4">
-            <h3 className="text-lg font-semibold">Categories</h3>
+            <h3 className="text-lg font-semibold">listing.categories</h3>
             <div className="mt-3 overflow-auto">
               <table className="w-full min-w-[640px] border-collapse text-left text-sm">
                 <thead className="text-[#625c52]">
                   <tr>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Level</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">ID</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Name</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Primary</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Sort</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">path</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">category_id</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">category_name</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">is_primary_category</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">sort_order</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {consolidatedFeed?.account.categories.map((categoryRow, index) => (
+                  {consolidatedFeed?.listing.categories.map((categoryRow, index) => (
                     <tr key={`${getRecordText(categoryRow, "category_id") ?? index}-${index}`}>
                       <td className="border-b border-[#ece4d4] py-2 pr-4 font-medium">
-                        {index === 0 ? "Category" : index === 1 ? "Subcategory" : `Category ${index + 1}`}
+                        listing.categories[{index}]
                       </td>
                       <td className="border-b border-[#ece4d4] py-2 pr-4 font-mono text-xs">
                         {getRecordText(categoryRow, "category_id") ?? ""}
@@ -1257,7 +863,7 @@ export default async function Home() {
           </section>
 
           <section className="mt-5 border border-[#d9d0bd] bg-white/70 p-4">
-            <h3 className="text-lg font-semibold">geo_codes</h3>
+            <h3 className="text-lg font-semibold">listing.geo_codes</h3>
             <div className="mt-3 overflow-auto">
               <table className="w-full min-w-[720px] border-collapse text-left text-sm">
                 <thead className="text-[#625c52]">
@@ -1270,7 +876,7 @@ export default async function Home() {
                   </tr>
                 </thead>
                 <tbody>
-                  {consolidatedFeed?.account.geo_codes.map((geoCode, index) => (
+                  {consolidatedFeed?.listing.geo_codes.map((geoCode, index) => (
                     <tr key={`${getRecordText(geoCode, "geo_code_id") ?? index}-${index}`}>
                       <td className="border-b border-[#ece4d4] py-2 pr-4 font-medium">
                         {getRecordText(geoCode, "geo_code_name") ?? ""}
@@ -1295,18 +901,18 @@ export default async function Home() {
           </section>
 
           <section className="mt-5 border border-[#d9d0bd] bg-white/70 p-4">
-            <h3 className="text-lg font-semibold">Joined Meeting Rooms</h3>
+            <h3 className="text-lg font-semibold">meetingRooms</h3>
             <div className="mt-3 overflow-auto">
               <table className="w-full min-w-[760px] border-collapse text-left text-sm">
                 <thead className="text-[#625c52]">
                   <tr>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Room</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Sq. Ft.</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Banquet</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Classroom</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Reception</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Theater</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Join</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">roomname</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">sqft</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">banquet</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">classroom</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">reception</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">theater</th>
+                    <th className="border-b border-[#d9d0bd] py-2 pr-4">detail_id</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1321,7 +927,7 @@ export default async function Home() {
                       <td className="border-b border-[#ece4d4] py-2 pr-4">{room.reception}</td>
                       <td className="border-b border-[#ece4d4] py-2 pr-4">{room.theater}</td>
                       <td className="border-b border-[#ece4d4] py-2 pr-4 font-mono text-xs">
-                        detail_id {room.detail_id}
+                        {room.detail_id}
                       </td>
                     </tr>
                   ))}
@@ -1448,16 +1054,16 @@ export default async function Home() {
           ))}
         </div>
 
-        <article id="merge-map" className="border border-[#a99b82] bg-[#fffaf0] p-5 shadow-sm">
+        <article id="source-map" className="border border-[#a99b82] bg-[#fffaf0] p-5 shadow-sm">
           <div className="max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#786449]">
-              Merge Map
+              Source Map
             </p>
             <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-              Three endpoints to old listing shape
+              Three endpoints to consolidated listing
             </h2>
             <p className="mt-2 text-sm leading-6 text-[#625c52]">
-              Use this as the comparison guide: the old listing is a merged target shape, not a single endpoint response. Listing data, account detail fields, and space records each contribute different sections.
+              The consolidated feed keeps live iDSS source arrays visible and adds only the joined sections needed to inspect the listing, account details, meeting facility, and rooms together.
             </p>
           </div>
 
@@ -1465,17 +1071,17 @@ export default async function Home() {
             <table className="w-full min-w-[960px] border-collapse text-left text-sm">
               <thead className="text-[#625c52]">
                 <tr>
-                  <th className="border-b border-[#d9d0bd] py-2 pr-4">Old listing field</th>
+                  <th className="border-b border-[#d9d0bd] py-2 pr-4">Consolidated section</th>
                   <th className="border-b border-[#d9d0bd] py-2 pr-4">Source endpoint</th>
                   <th className="border-b border-[#d9d0bd] py-2 pr-4">Source path / lookup</th>
-                  <th className="border-b border-[#d9d0bd] py-2 pr-4">Merge note</th>
+                  <th className="border-b border-[#d9d0bd] py-2 pr-4">Output</th>
                 </tr>
               </thead>
               <tbody>
-                {mappingRows.map((row) => (
-                  <tr key={row.oldField}>
+                {consolidatedSourceRows.map((row) => (
+                  <tr key={row.section}>
                     <td className="border-b border-[#ece4d4] py-2 pr-4 align-top font-mono text-xs">
-                      {row.oldField}
+                      {row.section}
                     </td>
                     <td className="border-b border-[#ece4d4] py-2 pr-4 align-top font-medium">
                       {row.source}
@@ -1484,7 +1090,7 @@ export default async function Home() {
                       {row.sourcePath}
                     </td>
                     <td className="border-b border-[#ece4d4] py-2 pr-4 align-top text-[#5d584f]">
-                      {row.transform}
+                      {row.output}
                     </td>
                   </tr>
                 ))}
@@ -1493,143 +1099,6 @@ export default async function Home() {
           </div>
         </article>
 
-        <article id="old-listing" className="border border-[#a99b82] bg-[#fffaf0] p-5 shadow-sm">
-          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#786449]">
-                Old Listing
-              </p>
-              <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                {oldListing.company}
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-[#625c52]">
-                {oldListing.description}
-              </p>
-            </div>
-
-            <dl className="grid gap-2 text-sm text-[#5d584f] sm:grid-cols-3 lg:min-w-[360px]">
-              <div>
-                <dt className="font-semibold text-[#20201d]">Record</dt>
-                <dd>{oldListing.recid}</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-[#20201d]">Media</dt>
-                <dd>{oldListing.media.length}</dd>
-              </div>
-              <div>
-                <dt className="font-semibold text-[#20201d]">Rooms</dt>
-                <dd>{oldListing.meetingrooms.length}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr]">
-            <section className="border border-[#d9d0bd] bg-white/70 p-4">
-              <h3 className="text-lg font-semibold">Summary</h3>
-              <dl className="mt-3 grid gap-2 text-sm text-[#5d584f] sm:grid-cols-2">
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Address</dt>
-                  <dd>{oldListing.address1}, {oldListing.city}, {oldListing.state} {oldListing.zip}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Category</dt>
-                  <dd>
-                    {oldListing.categories[0].catname} - {oldListing.categories[0].subcatname}
-                    <span className="block text-xs">
-                      catid {oldListing.categories[0].catid}, subcatid {oldListing.categories[0].subcatid}
-                    </span>
-                  </dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Contact</dt>
-                  <dd>{oldListing.fullname}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Email</dt>
-                  <dd className="break-all">{oldListing.contact_email}</dd>
-                </div>
-              </dl>
-            </section>
-
-            <section className="border border-[#d9d0bd] bg-white/70 p-4">
-              <h3 className="text-lg font-semibold">Meeting Facility</h3>
-              <dl className="mt-3 grid gap-2 text-sm text-[#5d584f] sm:grid-cols-2">
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Total Sq. Ft.</dt>
-                  <dd>{oldListing.meetingfacility.totalsqft}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Largest Room</dt>
-                  <dd>{oldListing.meetingfacility.largestroom}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Meeting Rooms</dt>
-                  <dd>{oldListing.meetingfacility.numrooms}</dd>
-                </div>
-                <div>
-                  <dt className="font-semibold text-[#20201d]">Guest Capacity</dt>
-                  <dd>{oldListing.meetingfacility.additional_object.guestcapacity.value}</dd>
-                </div>
-              </dl>
-            </section>
-          </div>
-
-          <section className="mt-5 border border-[#d9d0bd] bg-white/70 p-4">
-            <h3 className="text-lg font-semibold">Media</h3>
-            <div className="mt-3 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-3">
-              {oldListing.media.map((image) => (
-                <a
-                  key={image.mediaid}
-                  href={image.mediaurl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="border border-[#d9d0bd] bg-white p-3 text-[#20201d] hover:bg-[#f5f1e8]"
-                >
-                  <span className="font-semibold">{image.sortorder}. {image.medianame}</span>
-                  <span className="mt-1 block break-all text-xs text-[#625c52]">
-                    {image.mediaurl}
-                  </span>
-                </a>
-              ))}
-            </div>
-          </section>
-
-          <section className="mt-5 border border-[#d9d0bd] bg-white/70 p-4">
-            <h3 className="text-lg font-semibold">Meeting Rooms</h3>
-            <div className="mt-3 overflow-auto">
-              <table className="w-full min-w-[720px] border-collapse text-left text-sm">
-                <thead className="text-[#625c52]">
-                  <tr>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Room</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Sq. Ft.</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Banquet</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Classroom</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Reception</th>
-                    <th className="border-b border-[#d9d0bd] py-2 pr-4">Theater</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {oldListing.meetingrooms.map((room) => (
-                    <tr key={room.roomid}>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4 font-medium">
-                        {room.roomname}
-                      </td>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4">{room.sqft}</td>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4">{room.banquet}</td>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4">{room.classroom}</td>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4">{room.reception}</td>
-                      <td className="border-b border-[#ece4d4] py-2 pr-4">{room.theater}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </section>
-
-          <pre className="mt-5 max-h-96 overflow-auto border border-[#d9d0bd] bg-[#1f211d] p-4 text-xs leading-5 text-[#f5f1e8]">
-            {formatPayload(oldListing)}
-          </pre>
-        </article>
       </section>
 
       <style>{`
